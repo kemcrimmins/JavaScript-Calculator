@@ -1,8 +1,9 @@
 #calculatorBody {
-	height: 800px;
+	height: 500px;
 	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
+	background-color: skyblue;
 }
 
 #displayArea {
@@ -10,14 +11,33 @@
 	background-color: grey;
 }
 
-.keyRow {
+ul {
+	list-style-type: none;
+	float: left;
+}
 
+li {
+	display: inline;
+}
+
+.keyRow {
+	width: 400px;
+	float: left;
 }
 
 .key {
-
+	margin-right: 30px;
+	border: solid lightgray;
+	height: 40px;
+	width: 50px;
+	float: left;
+	text-align: center;
 }
 
 .operator {
 
+}
+
+#Zero {
+	width: 135px;
 }
