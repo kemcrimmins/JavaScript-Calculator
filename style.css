@@ -6,7 +6,8 @@
 }
 
 #displayArea {
-
+	height: 100px;
+	background-color: grey;
 }
 
 .keyRow {
