@@ -1,19 +1,22 @@
-.calcultorBody {
+#calculatorBody {
+	height: 800px;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#displayArea {
 
 }
 
-.displayArea {
+.keyRow {
 
 }
 
-#keyRow {
+.key {
 
 }
 
-#key {
-
-}
-
-#operator {
+.operator {
 
 }
