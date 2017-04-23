@@ -1,5 +1,5 @@
 var inputValue = 0;
-var inputArray = [1, '+',1.5,'-',20];
+var inputArray = [1, '+',1.5,'-',20]; // Remove
 
 function numberBuilder () {
 
@@ -13,15 +13,15 @@ function divide (a, b) {
 	rerutn a / b;
 }
 
-function calculateSum () {
+function calculateSum (inputArr) { 
 	var result = 0;
-	for (var i = 0; i < inputArray.length - 1; i+=2) { // length - 1 so don't exceeed array
-		if (inputArray[i + 1] === '+') {
-			result = inputArray[i] + inputArray[i + 2];
+	for (var i = 0; i < inputArr.length - 1; i+=2) { // length - 1 so don't exceeed array
+		if (inputArr[i + 1] === '+') {
+			result = inputArr[i] + inputArr[i + 2];
 		} else {
-			result = inputArray[i] - inputArray[i + 2];
+			result = inputArr[i] - inputArr[i + 2];
 		}
-		inputArray[i + 2] = result;
+		inputArr[i + 2] = result;
 	}
 	return result;
 }
