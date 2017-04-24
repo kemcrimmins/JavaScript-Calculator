@@ -1,5 +1,5 @@
 var inputValue = 0;
-var inputArray = [1, '+',1.5,'-',20]; // Remove
+var inputArray = [1, '+',1.5,'-',20]; // Reset to empty array after testing
 
 function numberBuilder () {
 
