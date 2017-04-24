@@ -1,5 +1,15 @@
+var display = document.querySelector('#dislplayArea');
+var displayLimit = 8;
+
 var inputValue = 0;
 var inputArray = [1, '+',1.5,'-',20]; // Reset to empty array after testing
+
+var keys = document.querySelectorAll('.key');
+for (var i = 0; i < keys.length; i++) {
+	keys[i].addEventListener('click', function() {
+		console.log(this.innerHTML);
+	});
+}
 
 function numberBuilder () {
 
@@ -10,7 +20,7 @@ function multiply (a, b) {
 }
 
 function divide (a, b) {
-	rerutn a / b;
+	return a / b;
 }
 
 function calculateSum (inputArr) { 
@@ -27,9 +37,11 @@ function calculateSum (inputArr) {
 }
 
 function clearEntry() {
-	return inputArray.pop();
+	display.innerHTML = '0';
+	inputArray.pop();
 }
 
 function allClear () {
+	display.innerHTML = '0';
 	inputArray = [];
 }
