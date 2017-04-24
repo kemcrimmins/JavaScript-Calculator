@@ -44,7 +44,7 @@ li {
 
 
 .key {
-	border: solid lightgray 1px; 
+	border: solid lightgrey 1px; 
 	height: 90.5px;
 	width: 90.5px;
 	line-height: 90.5px;
@@ -52,10 +52,13 @@ li {
 	text-align: center;
 	background-color: skyblue;
 	font-size: 30px;
-	/*color: blue;*/
 }
 
 .operator {
+	background-color: steelblue;
+}
+
+#Calculate {
 	background-color: steelblue;
 }
 
