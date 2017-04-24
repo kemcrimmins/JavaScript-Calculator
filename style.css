@@ -44,13 +44,13 @@ li {
 
 
 .key {
-	border: solid lightgrey 1px; 
+	border: solid darkgrey 1px; 
 	height: 90.5px;
 	width: 90.5px;
 	line-height: 90.5px;
 	float: left;
 	text-align: center;
-	background-color: skyblue;
+	background-color: lightblue;
 	font-size: 30px;
 }
 
@@ -68,4 +68,8 @@ li {
 
 #Information {
 	font-family: serif;
+}
+
+#AC, #CE, #Information {
+	background-color: skyblue;
 }
