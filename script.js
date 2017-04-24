@@ -35,8 +35,13 @@ function calculateSum () {
 }
 
 function clearEntry() {
-	display.innerHTML = '0';
-	inputArray.pop();
+	if (display.innerHTML === '+' ||
+		display.innerHTML === '-' ||
+		display.innerHTML === 'x' ||
+		display.innerHTML === '&#247') { // remove operator from end of array
+		inputArray.splice(-1);
+	}
+	display.innerHTML = '0';	
 }
 
 function allClear () {
@@ -49,13 +54,13 @@ function allClear () {
 var numberKeys = document.querySelectorAll('.number');
 for (var i = 0; i < numberKeys.length; i++) {
 	numberKeys[i].addEventListener('click', function() {
-		if (display.innerHTML === '0' ||
-			display.innerHTML === '+' ||
+		if (display.innerHTML === '0' ||   // check whether beginning new number
+			display.innerHTML === '+' ||   
 			display.innerHTML === '-' ||
 			display.innerHTML === 'x' ||
 			display.innerHTML === '&#247') {
-			display.innerHTML = this.innerHTML;
-		} else {
+			display.innerHTML = this.innerHTML; 
+		} else {								 // otherwise continue building number
 			display.innerHTML += this.innerHTML;
 		}	
 	});
@@ -64,13 +69,14 @@ for (var i = 0; i < numberKeys.length; i++) {
 var operatorKeys = document.querySelectorAll('.operator');
 for (var j = 0; j < operatorKeys.length; j++) {
 	operatorKeys[j].addEventListener('click', function(){
-		if (display.innerHTML !== '+' && 
+		if (display.innerHTML !== '+' &&      // prevent successive operators
 			display.innerHTML !== '-' &&
 			display.innerHTML !== 'x' &&
 			display.innerHTML !== '&#247') 
 		{
-			inputArray.push(numberBuilder(), this.innerHTML);
-			display.innerHTML = this.innerHTML;
+			inputArray.push(numberBuilder(), this.innerHTML); 	/* convert str -> num, 
+																 push num and oper to array */
+			display.innerHTML = this.innerHTML;	 // set display to operator		
 		}
 	});
 }	
