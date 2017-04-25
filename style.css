@@ -4,7 +4,7 @@ body {
 }
 #calculatorBody {
 	padding-top: 15px;
-	height: 580px;
+	height: 600px;
 	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
@@ -19,6 +19,18 @@ body {
 	background-color: grey;
 	text-align: right;
 	font-size: 70px;
+	padding-right: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#calculationsArea {
+	height: 20px;
+	width: 350px;
+	line-height: 20px;
+	background-color: grey;
+	text-align: right;
+	font-size: 15px;
 	padding-right: 20px;
 	margin-right: auto;
 	margin-left: auto;

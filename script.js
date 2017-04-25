@@ -1,8 +1,10 @@
 var display = document.querySelector('#displayArea');
 var displayLimit = 8;
+var calculations = document.querySelector('#calculationsArea');
 
-var inputValue = 0;
-var inputArray = []; // Reset to empty array after testing
+
+var inputArray = []; // array for calculations
+var displayArray = []; // array for displaying all operations
 
 function numberBuilder () {
 	var number = parseFloat(display.innerHTML, 10);
@@ -18,7 +20,7 @@ function divide (a, b) {
 	return a / b;
 }
 
-function calculateSum () { 
+function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 	var input = inputArray;
 	var result = input[0];
 	for (var i = 0; i < input.length - 1; i+=2) { // length - 1 so don't exceeed array
@@ -38,8 +40,8 @@ function clearEntry() {
 	if (display.innerHTML === '+' ||
 		display.innerHTML === '-' ||
 		display.innerHTML === 'x' ||
-		display.innerHTML === '&#247') { // remove operator from end of array
-		inputArray.splice(-1);
+		display.innerHTML === '&#247') { 
+		inputArray.splice(-1);    // remove operator from end of array
 	}
 	display.innerHTML = '0';	
 }
@@ -60,8 +62,10 @@ for (var i = 0; i < numberKeys.length; i++) {
 			display.innerHTML === 'x' ||
 			display.innerHTML === '&#247') {
 			display.innerHTML = this.innerHTML; 
+			calculations.innerHTML = this.innerHTML;
 		} else {								 // otherwise continue building number
 			display.innerHTML += this.innerHTML;
+			calculations.innerHTML += this.innerHTML;
 		}	
 	});
 }
@@ -76,7 +80,11 @@ for (var j = 0; j < operatorKeys.length; j++) {
 		{
 			inputArray.push(numberBuilder(), this.innerHTML); 	/* convert str -> num, 
 																 push num and oper to array */
+
+			displayArray.push(numberBuilder(), this.innerHTML); // update displayArray
+
 			display.innerHTML = this.innerHTML;	 // set display to operator		
+			calculations.innerHTML += this.innerHTML;
 		}
 	});
 }	
