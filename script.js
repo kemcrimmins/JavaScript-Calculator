@@ -1,6 +1,6 @@
 var display = document.querySelector('#displayArea');
 var displayLimit = 8;
-var calculations = document.querySelector('#calculationsArea');
+var calculationsDisplay = document.querySelector('#calculationsArea');
 
 
 var inputArray = []; // array for calculations
@@ -33,6 +33,7 @@ function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 		console.log(result);
 	}
 	display.innerHTML = result;
+	calculationsDisplay.innerHTML = result;
 	inputArray = [];
 }
 
@@ -48,6 +49,7 @@ function clearEntry() {
 
 function allClear () {
 	display.innerHTML = '0';
+	calculationsDisplay.innerHTML = '0';
 	inputArray = [];
 }
 
@@ -56,16 +58,22 @@ function allClear () {
 var numberKeys = document.querySelectorAll('.number');
 for (var i = 0; i < numberKeys.length; i++) {
 	numberKeys[i].addEventListener('click', function() {
-		if (display.innerHTML === '0' ||   // check whether beginning new number
-			display.innerHTML === '+' ||   
-			display.innerHTML === '-' ||
-			display.innerHTML === 'x' ||
-			display.innerHTML === '&#247') {
+		if(display.innerHTML === '0' ||   // check whether beginning new number
+		  display.innerHTML === '+' ||   
+		  display.innerHTML === '-' ||
+		  display.innerHTML === 'x' ||
+		  display.innerHTML === '&#247') 
+		{
 			display.innerHTML = this.innerHTML; 
-			calculations.innerHTML = this.innerHTML;
+			if (calculationsDisplay.innerHTML.length > 1) { // keeps adding to calculationsDisplay
+				calculationsDisplay.innerHTML += this.innerHTML;
+			} else {
+				calculationsDisplay.innerHTML = this.innerHTML;
+			}
+			
 		} else {								 // otherwise continue building number
 			display.innerHTML += this.innerHTML;
-			calculations.innerHTML += this.innerHTML;
+			calculationsDisplay.innerHTML += this.innerHTML;
 		}	
 	});
 }
@@ -84,7 +92,7 @@ for (var j = 0; j < operatorKeys.length; j++) {
 			displayArray.push(numberBuilder(), this.innerHTML); // update displayArray
 
 			display.innerHTML = this.innerHTML;	 // set display to operator		
-			calculations.innerHTML += this.innerHTML;
+			calculationsDisplay.innerHTML += this.innerHTML;
 		}
 	});
 }	
