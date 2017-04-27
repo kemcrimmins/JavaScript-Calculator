@@ -22,10 +22,7 @@ function startCalculator () {
 
 	document.querySelector('#AC').addEventListener('click', allClear);
 	document.querySelector('#CE').addEventListener('click', clearEntry);
-	document.querySelector('#Calculate').addEventListener('click', function(){
-		inputArray.push(numberBuilder());
-		calculateSum();
-	});
+	document.querySelector('#Calculate').addEventListener('click', calculateSum);
 }
 
 // 	BEGIN KEY-BINDING FUNCTIONS
@@ -69,13 +66,13 @@ function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 	var input = inputArray;
 	var result = input[0];
 
-/*	NEED TO PREVENT calculateSum IF LAST KEYENTRY WAS AN OPERATOR
+/*	NEED TO PREVENT calculateSum IF LAST KEYENTRY WAS AN OPERATOR */
 	if (display.innerHTML === '+' ||
 		display.innerHTML === '-' ||
 		display.innerHTML === 'x' ||
 		display.innerHTML === '&#247') return;
-		*/
-
+		
+	inputArray.push(numberBuilder());
 	for (var i = 0; i < input.length - 1; i+=2) { // length - 1 so don't exceeed array
 		if (input[i + 1] === '+') {
 			result = result + input[i + 2];
