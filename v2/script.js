@@ -1,5 +1,5 @@
 var mainDisplay = document.querySelector('#displayArea');
-var calculationsDisplay = document.querySelector('#calculationsArea');
+//var calculationsDisplay = document.querySelector('#calculationsArea');
 var displayLimit = 8;
 
 var operators = ['+', '-', '/', '*'];
@@ -22,6 +22,7 @@ function startCalculator () {
 	document.querySelector('#AC').addEventListener('click', allClear);
 	document.querySelector('#CE').addEventListener('click', clearEntry);
 	document.querySelector('#Calculate').addEventListener('click', calculateSum);
+	document.querySelector('#Decimal').addEventListener('click', checkDecimal);
 }
 
 // 	BEGIN KEY-BINDING FUNCTIONS
@@ -30,15 +31,9 @@ function processNumberKeys () {
 	  operators.indexOf(mainDisplay.innerHTML) > - 1)
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
-		if (calculationsDisplay.innerHTML.length > 1) { // if numbers already entered
-			calculationsDisplay.innerHTML += this.innerHTML;
-		} else {
-			calculationsDisplay.innerHTML = this.innerHTML; // no numbers already entered
-		}
 		
 	} else {								 // otherwise continue building number
 		mainDisplay.innerHTML += this.innerHTML;
-		calculationsDisplay.innerHTML += this.innerHTML;
 	}	
 }
 
@@ -49,7 +44,14 @@ function processOperatorKeys () {
 															 push num and operator to array */
 
 		mainDisplay.innerHTML = this.innerHTML;	 // set display to operator		
-		calculationsDisplay.innerHTML += this.innerHTML;
+	}
+}
+
+function checkDecimal () {
+	if (mainDisplay.innerHTML.split('.').length - 1 > 0) {
+		console.log("Duplicate decimals");
+	} else {
+		mainDisplay.innerHTML += this.innerHTML;
 	}
 }
 
@@ -63,7 +65,6 @@ function calculateSum () {
 	result = eval(inputArray.join(''));
 
 	mainDisplay.innerHTML = result;
-	calculationsDisplay.innerHTML = result;
 	inputArray = [];
 }
 
@@ -76,7 +77,6 @@ function clearEntry() {  // NEED TO IMPLEMENT CLEAR ENTRY FOR calculationsDispla
 
 function allClear () {
 	mainDisplay.innerHTML = '0';
-	calculationsDisplay.innerHTML = '0';
 	inputArray = [];
 }
 // END KEY-BINDING FUNCTIONS
@@ -84,16 +84,7 @@ function allClear () {
 // HELPER FUNCTIONS
 function numberBuilder () {
 	var number = parseFloat(mainDisplay.innerHTML, 10);
-	//console.log(number);
 	return number;
-}
-
-function multiply (a, b) {
-	return a * b;
-}
-
-function divide (a, b) {
-	return a / b;
 }
 
 startCalculator();
