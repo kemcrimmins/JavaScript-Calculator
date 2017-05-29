@@ -1,11 +1,7 @@
 var mainDisplay = document.querySelector('#displayArea');
-//var calculationsDisplay = document.querySelector('#calculationsArea');
 var displayLimit = 8;
-
 var operators = ['+', '-', '/', '*'];
-
 var inputArray = []; // array for calculations
-
 
 function startCalculator () {
 	/*---- addEventListener to execute key-binding functions on all keys ----*/
@@ -71,20 +67,27 @@ function calculateSum () {
 	result = eval(inputArray.join('')).toString(); // calculate and convert to string for parsing
 	console.log(result.length);
 
-	if (result.length > displayLimit && result.indexOf('.') < 0) {
-		mainDisplay.innerHTML = "ERROR";
-	} else {
-
-		mainDisplay.innerHTML = result;
-		inputArray = [];
+	if (result.length > displayLimit ) { // check result against display length
+		if (result.indexOf('.') > 8 || result.indexOf('.') < 0) { // 
+			result = "ERROR";
+		} else {
+			result = result.slice(0, 9);
+		}
 	}
+
+	mainDisplay.innerHTML = result;
+	inputArray = [];
 }
 
-function clearEntry() {  // NEED TO IMPLEMENT CLEAR ENTRY FOR calculationsDisplay
+function clearEntry() {  
 	if (operators.indexOf(mainDisplay.innerHTML) > -1) { // check for operator
-		inputArray.splice(-1);    // remove operator from end of array
+		inputArray.splice(-1);    // remove operator from end of inputArray
+		mainDisplay.innerHTML = inputArray[inputArray.length - 1]; // update display; update inputArray
+		inputArray.splice(-1);
+	} else {
+		mainDisplay.innerHTML = inputArray[inputArray.length - 1];
 	}
-	mainDisplay.innerHTML = '0';	
+
 }
 
 function allClear () {
