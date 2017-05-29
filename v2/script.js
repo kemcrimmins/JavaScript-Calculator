@@ -53,12 +53,11 @@ function processOperatorKeys () {
 	}
 }
 
-function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
-	var input = inputArray;
+function calculateSum () { 
 	var result;
 
-
-	if (operators.indexOf(mainDisplay.innerHTML) > - 1) return; // Exit calculateSum if last keyentry was an operator 
+	if (operators.indexOf(mainDisplay.innerHTML) > - 1) 
+		return; // Exit calculateSum if last keyentry was an operator 
 		
 	inputArray.push(numberBuilder());
 	result = eval(inputArray.join(''));
