@@ -1,6 +1,9 @@
 var mainDisplay = document.querySelector('#displayArea');
-var displayLimit = 8;
 var calculationsDisplay = document.querySelector('#calculationsArea');
+var displayLimit = 8;
+
+var operators = ['+', '-', '/', '*'];
+
 var inputArray = []; // array for calculations
 
 
@@ -24,10 +27,7 @@ function startCalculator () {
 // 	BEGIN KEY-BINDING FUNCTIONS
 function processNumberKeys () {
 	if(mainDisplay.innerHTML === '0' ||   // check whether beginning new number
-	  mainDisplay.innerHTML === '+' ||   
-	  mainDisplay.innerHTML === '-' ||
-	  mainDisplay.innerHTML === '*' ||
-	  mainDisplay.innerHTML === '/') 
+	  operators.indexOf(mainDisplay.innerHTML) > - 1)
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
 		if (calculationsDisplay.innerHTML.length > 1) { // if numbers already entered
@@ -43,10 +43,7 @@ function processNumberKeys () {
 }
 
 function processOperatorKeys () {
-	if (mainDisplay.innerHTML !== '+' &&      // prevent successive operators
-		mainDisplay.innerHTML !== '-' &&
-		mainDisplay.innerHTML !== '*' &&
-		mainDisplay.innerHTML !== '/') 
+	if (operators.indexOf(mainDisplay.innerHTML) < 0 )      // prevent successive operators
 	{
 		inputArray.push(numberBuilder(), this.innerHTML); 	/* convert str -> num, 
 															 push num and operator to array */
@@ -61,10 +58,7 @@ function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 	var result;
 
 
-	if (mainDisplay.innerHTML === '+' ||
-		mainDisplay.innerHTML === '-' ||
-		mainDisplay.innerHTML === '*' ||
-		mainDisplay.innerHTML === '/') return; // Exit calculateSum if last keyentry was an operator 
+	if (operators.indexOf(mainDisplay.innerHTML) > - 1) return; // Exit calculateSum if last keyentry was an operator 
 		
 	inputArray.push(numberBuilder());
 	result = eval(inputArray.join(''));
@@ -75,10 +69,7 @@ function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 }
 
 function clearEntry() {  // NEED TO IMPLEMENT CLEAR ENTRY FOR calculationsDisplay
-	if (mainDisplay.innerHTML === '+' ||
-		mainDisplay.innerHTML === '-' ||
-		mainDisplay.innerHTML === '*' ||
-		mainDisplay.innerHTML === '/') { 
+	if (operators.indexOf(mainDisplay.innerHTML) > -1) { // check for operator
 		inputArray.splice(-1);    // remove operator from end of array
 	}
 	mainDisplay.innerHTML = '0';	
