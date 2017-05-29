@@ -42,7 +42,12 @@ function processOperatorKeys () {
 	if(mainDisplay.innerHTML === '0' // prevent operator as first entry
 		&& operators.indexOf(this.innerHTML) > -1
 		&& inputArray.length === 0) {
-		console.log("Cannot begin calculations with an operator");
+		if (this.innerHTML === '-') {
+			mainDisplay.innerHTML = this.innerHTML;
+			inputArray.push(this.innerHTML);
+		} else {
+			console.log("Cannot begin calculations with an operator");
+		}
 	} else if (operators.indexOf(mainDisplay.innerHTML) < 0 ) {     // prevent successive operators
 		inputArray.push(numberBuilder(), this.innerHTML); 	//convert str -> num, push num & operator to array
 		mainDisplay.innerHTML = this.innerHTML;	 // set display to operator		
