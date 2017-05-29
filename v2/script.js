@@ -33,7 +33,7 @@ function processNumberKeys () {
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
 		
-	} else if (mainDisplay.innerHTML.length > 8) {
+	} else if (mainDisplay.innerHTML.length > displayLimit) { // ERROR if input exceeds displayLimit
 		mainDisplay.innerHTML = "ERROR";
 	}
 
@@ -43,11 +43,12 @@ function processNumberKeys () {
 }
 
 function processOperatorKeys () {
-	if (operators.indexOf(mainDisplay.innerHTML) < 0 )      // prevent successive operators
-	{
-		inputArray.push(numberBuilder(), this.innerHTML); 	/* convert str -> num, 
-															 push num and operator to array */
-
+	if(mainDisplay.innerHTML === '0' // prevent operator as first entry
+		&& operators.indexOf(this.innerHTML) > -1
+		&& inputArray.length === 0) {
+		console.log("Cannot begin calculations with an operator");
+	} else if (operators.indexOf(mainDisplay.innerHTML) < 0 ) {     // prevent successive operators
+		inputArray.push(numberBuilder(), this.innerHTML); 	//convert str -> num, push num & operator to array
 		mainDisplay.innerHTML = this.innerHTML;	 // set display to operator		
 	}
 }
@@ -67,10 +68,16 @@ function calculateSum () {
 		return; // Exit calculateSum if last keyentry was an operator 
 		
 	inputArray.push(numberBuilder());
-	result = eval(inputArray.join(''));
+	result = eval(inputArray.join('')).toString(); // calculate and convert to string for parsing
+	console.log(result.length);
 
-	mainDisplay.innerHTML = result;
-	inputArray = [];
+	if (result.length > displayLimit && result.indexOf('.') < 0) {
+		mainDisplay.innerHTML = "ERROR";
+	} else {
+
+		mainDisplay.innerHTML = result;
+		inputArray = [];
+	}
 }
 
 function clearEntry() {  // NEED TO IMPLEMENT CLEAR ENTRY FOR calculationsDisplay
