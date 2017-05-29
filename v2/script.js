@@ -28,11 +28,16 @@ function startCalculator () {
 // 	BEGIN KEY-BINDING FUNCTIONS
 function processNumberKeys () {
 	if(mainDisplay.innerHTML === '0' ||   // check whether beginning new number
-	  operators.indexOf(mainDisplay.innerHTML) > - 1)
+	  	operators.indexOf(mainDisplay.innerHTML) > - 1 ||
+		mainDisplay.innerHTML == 'ERROR')
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
 		
-	} else {								 // otherwise continue building number
+	} else if (mainDisplay.innerHTML.length > 8) {
+		mainDisplay.innerHTML = "ERROR";
+	}
+
+	else {								 // otherwise continue building number
 		mainDisplay.innerHTML += this.innerHTML;
 	}	
 }
