@@ -1,11 +1,7 @@
 var mainDisplay = document.querySelector('#displayArea');
 var displayLimit = 8;
 var calculationsDisplay = document.querySelector('#calculationsArea');
-
-
 var inputArray = []; // array for calculations
-//var displayArray = []; // array for displaying all operations
-
 
 
 function startCalculator () {
@@ -30,8 +26,8 @@ function processNumberKeys () {
 	if(mainDisplay.innerHTML === '0' ||   // check whether beginning new number
 	  mainDisplay.innerHTML === '+' ||   
 	  mainDisplay.innerHTML === '-' ||
-	  mainDisplay.innerHTML === 'x' ||
-	  mainDisplay.innerHTML === '&#247') 
+	  mainDisplay.innerHTML === '*' ||
+	  mainDisplay.innerHTML === '/') 
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
 		if (calculationsDisplay.innerHTML.length > 1) { // if numbers already entered
@@ -49,13 +45,11 @@ function processNumberKeys () {
 function processOperatorKeys () {
 	if (mainDisplay.innerHTML !== '+' &&      // prevent successive operators
 		mainDisplay.innerHTML !== '-' &&
-		mainDisplay.innerHTML !== 'x' &&
-		mainDisplay.innerHTML !== '&#247') 
+		mainDisplay.innerHTML !== '*' &&
+		mainDisplay.innerHTML !== '/') 
 	{
 		inputArray.push(numberBuilder(), this.innerHTML); 	/* convert str -> num, 
 															 push num and operator to array */
-
-		//displayArray.push(numberBuilder(), this.innerHTML); // update displayArray
 
 		mainDisplay.innerHTML = this.innerHTML;	 // set display to operator		
 		calculationsDisplay.innerHTML += this.innerHTML;
@@ -64,34 +58,27 @@ function processOperatorKeys () {
 
 function calculateSum () {  // CLEAN THIS UP. DELETE var input, ETC
 	var input = inputArray;
-	var result = input[0];
+	var result;
 
 
 	if (mainDisplay.innerHTML === '+' ||
 		mainDisplay.innerHTML === '-' ||
-		mainDisplay.innerHTML === 'x' ||
-		mainDisplay.innerHTML === '&#247') return; // Exit calculateSum if last keyentry was an operator 
+		mainDisplay.innerHTML === '*' ||
+		mainDisplay.innerHTML === '/') return; // Exit calculateSum if last keyentry was an operator 
 		
 	inputArray.push(numberBuilder());
-	for (var i = 0; i < input.length - 1; i+=2) { // length - 1 so don't exceeed array
-		if (input[i + 1] === '+') {
-			result = result + input[i + 2];
-		} else {
-			result = result - input[i + 2];
-		}
-		//input[i + 2] = result;
-		//console.log(result);
-	}
+	result = eval(inputArray.join(''));
+
 	mainDisplay.innerHTML = result;
 	calculationsDisplay.innerHTML = result;
 	inputArray = [];
 }
 
-function clearEntry() {
+function clearEntry() {  // NEED TO IMPLEMENT CLEAR ENTRY FOR calculationsDisplay
 	if (mainDisplay.innerHTML === '+' ||
 		mainDisplay.innerHTML === '-' ||
-		mainDisplay.innerHTML === 'x' ||
-		mainDisplay.innerHTML === '&#247') { 
+		mainDisplay.innerHTML === '*' ||
+		mainDisplay.innerHTML === '/') { 
 		inputArray.splice(-1);    // remove operator from end of array
 	}
 	mainDisplay.innerHTML = '0';	
@@ -118,8 +105,5 @@ function multiply (a, b) {
 function divide (a, b) {
 	return a / b;
 }
-
-
-
 
 startCalculator();
