@@ -39,10 +39,12 @@ function processNumberKeys () {
 }
 
 function processOperatorKeys () {
-	if(mainDisplay.innerHTML === '0' // prevent operator as first entry
+	if((mainDisplay.innerHTML === '0' // prevent operator as first entry
 		&& operators.indexOf(this.innerHTML) > -1
-		&& inputArray.length === 0) {
-		if (this.innerHTML === '-') {
+		&& inputArray.length === 0) 
+		|| (mainDisplay.innerHTML === 'ERROR')) // handle ERROR from previous calculation
+		{
+		if (this.innerHTML === '-') { // exception for negative as first entry
 			mainDisplay.innerHTML = this.innerHTML;
 			inputArray.push(this.innerHTML);
 		} else {
