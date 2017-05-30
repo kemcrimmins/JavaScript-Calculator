@@ -2,6 +2,7 @@ var mainDisplay = document.querySelector('#displayArea');
 var displayLimit = 8;
 var operators = ['+', '-', '/', '*'];
 var inputArray = []; // array for calculations
+var calculatedResult = false; // handler for new calculation
 
 function startCalculator () {
 	/*---- addEventListener to execute key-binding functions on all keys ----*/
@@ -24,10 +25,12 @@ function startCalculator () {
 // 	BEGIN KEY-BINDING FUNCTIONS
 function processNumberKeys () {
 	if(mainDisplay.innerHTML === '0' ||   // check whether beginning new number
-	  	operators.indexOf(mainDisplay.innerHTML) > - 1 ||
-		mainDisplay.innerHTML == 'ERROR')
+	  	operators.indexOf(mainDisplay.innerHTML) > - 1
+	  	|| mainDisplay.innerHTML ==='ERROR'
+	  	|| calculatedResult === true)
 	{
 		mainDisplay.innerHTML = this.innerHTML; 
+		calculatedResult = false;
 		
 	} else if (mainDisplay.innerHTML.length > displayLimit) { // ERROR if input exceeds displayLimit
 		mainDisplay.innerHTML = "ERROR";
@@ -57,6 +60,7 @@ function processOperatorKeys () {
 }
 
 function checkDecimal () {
+	/*------ Prevents entry of multiple decimals  ------*/
 	if (mainDisplay.innerHTML.split('.').length - 1 > 0) {
 		console.log("Duplicate decimals");
 	} else {
@@ -83,7 +87,8 @@ function calculateSum () {
 	}
 
 	mainDisplay.innerHTML = result;
-	inputArray = [];
+	inputArray = []; // prepare inputArray for next calculation
+	calculatedResult = true; // prepare mainDisplay for next calculation
 }
 
 function clearEntry() {  
