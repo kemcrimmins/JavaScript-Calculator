@@ -78,10 +78,10 @@ li {
 	width: 183px;
 }
 
-#Information {
+#Author {
 	font-family: serif;
 }
 
-#AC, #CE, #Information {
+#AC, #CE, #Author {
 	background-color: skyblue;
 }
