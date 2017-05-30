@@ -111,10 +111,11 @@ function allClear () {
 }
 // END KEY-BINDING FUNCTIONS
 
-// HELPER FUNCTIONS
+// HELPER FUNCTION
 function numberBuilder () {
 	var number = parseFloat(mainDisplay.innerHTML, 10);
 	return number;
 }
 
+// MAKE IT GO!
 startCalculator();
