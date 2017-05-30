@@ -96,7 +96,10 @@ function clearEntry() {
 		inputArray.splice(-1);    // remove operator from end of inputArray
 		mainDisplay.innerHTML = inputArray[inputArray.length - 1]; // update display; update inputArray
 		inputArray.splice(-1);
-	} else {
+	} else if (calculatedResult = true) { // clearEntry for subsequent calculation
+		allClear();
+		calculatedResult = false;
+	}else {
 		mainDisplay.innerHTML = inputArray[inputArray.length - 1];
 	}
 
